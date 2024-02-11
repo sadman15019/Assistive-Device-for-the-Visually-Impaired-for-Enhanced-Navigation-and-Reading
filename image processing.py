@@ -4,7 +4,7 @@ import numpy as np
 # Reading the image from the present directory
 
 def clahe():
-    image = cv2.imread("test2.jpeg",0)
+    image = cv2.imread("original.jpg")
     # Resizing the image for compatibility
     #image = cv2.resize(image, (500, 600))
      
@@ -76,18 +76,32 @@ def perspective(img):
     result = cv2.warpPerspective(img, matrix,(img.shape[0],img.shape[1]))
     
     return result
+
+def increase_brightness(img, value=30):
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    h, s, v = cv2.split(hsv)
+    lim = 255 - value
+    v[v > lim] = 255
+    v[v <= lim] += value
+    final_hsv = cv2.merge((h, s, v))
+    img = cv2.cvtColor(final_hsv, cv2.COLOR_HSV2BGR)
+    return img  
   
 
-img = cv2.imread("test2.jpeg", cv2.IMREAD_GRAYSCALE) 
-img=perspective(img)
-img2 = cv2.imread("test2.jpeg", cv2.IMREAD_GRAYSCALE)   
-cv2.imshow("image", img)
-cv2.waitKey(0)
-cv2.destroyAllWindows() 
+img = cv2.imread("original.jpg") 
+
+
+
+img2 = cv2.imread("medium_test.jpeg", cv2.IMREAD_GRAYSCALE)   
+
 
 img=highboostfilter(img)
 
 cv2.imshow("High Boost Filter", img)
+cv2.waitKey(0)
+
+cv2.imwrite("yoyo.jpeg",img)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -96,19 +110,19 @@ img=bilateral(img)
 cv2.imshow("bilateral on highboost",img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
+cv2.imwrite("yoyo.jpeg",img)
 
-img2=superhighboost(img2)
+# img2=superhighboost(img2)
 
-cv2.imshow("superHigh Boost Filter", img2)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.imshow("superHigh Boost Filter", img2)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
-img2=bilateral(img2)
+# img2=bilateral(img2)
 
-cv2.imshow("bilateral on highboost",img2)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# cv2.imshow("bilateral on highboost",img2)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
 
-cv2.imwrite("yoyo.jpeg",img2)
 
     
