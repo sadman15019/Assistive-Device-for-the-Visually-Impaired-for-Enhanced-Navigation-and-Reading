@@ -4,6 +4,7 @@ It is a lightweight, low-cost spectacle built on a Raspberry Pi. It helps visual
 
 - **Moving safely:** laser distance sensors detect obstacles ahead and the device gives an audio alert. An accelerometer detects falls and notifies a caregiver.
 - **Reading:** a camera captures a document, an image-processing pipeline cleans it up, Tesseract OCR reads it, and the text is spoken aloud.
+- Find the paper here: https://ieeexplore.ieee.org/abstract/document/11024586
 
 ## Results
 
