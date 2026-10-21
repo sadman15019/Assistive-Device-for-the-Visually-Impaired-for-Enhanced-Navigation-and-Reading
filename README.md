@@ -68,6 +68,8 @@ VL53L0X time-of-flight laser sensors measure the distance to objects in front of
 
 ## Hardware
 
+![Circuit diagram](docs/images/circuit_diagram.jpg)
+
 | Component | Purpose |
 | --- | --- |
 | Raspberry Pi CM4 | Main processor |
