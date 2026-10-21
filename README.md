@@ -31,6 +31,12 @@ OCR was tested on 25 document images (21,852 characters, 4,482 words).
 └── docs/images/      Figures used in this README
 ```
 
+## System architecture
+
+![System architecture](docs/images/system_architecture.png)
+
+The camera, the ToF distance sensors and the accelerometer feed a Raspberry Pi, which runs three modules: optical character recognition, obstacle avoidance and fall detection.
+
 ## How it works
 
 ### 1. Obstacle avoidance
@@ -42,6 +48,8 @@ VL53L0X time-of-flight laser sensors measure the distance to objects in front of
 `hardware/fall_detection.py` reads the ADXL345 accelerometer continuously. During a fall, the total acceleration drops close to zero. If it stays below a free-fall threshold for several readings in a row, a "Fall Detected" message is sent to the guardian through a Telegram bot.
 
 ### 3. Optical character recognition (OCR)
+
+![OCR image processing pipeline](docs/images/ocr_pipeline.png)
 
 | Document outline detected | After perspective correction | Line segmentation (dilation) |
 | --- | --- | --- |
@@ -71,10 +79,6 @@ VL53L0X time-of-flight laser sensors measure the distance to objects in front of
 
 Total prototype cost: about 16,100 BDT.
 
-## Dataset
-
-The OCR dataset has 30 typed English documents in different font sizes, augmented with rotation and reduced brightness. `sample_dataset/` contains 8 example images covering full pages, skewed and perspective-distorted pages, low light, a table, and real-time captures from the device camera.
-
 ## Running the OCR pipeline
 
 1. Install [Tesseract OCR](https://github.com/tesseract-ocr/tesseract).
@@ -95,15 +99,3 @@ The OCR dataset has 30 typed English documents in different font sizes, augmente
 The hardware scripts run on the Raspberry Pi and need `RPi.GPIO`, the [VL53L0X Python library](https://github.com/johnbmoore/VL53L0X_rasp_python), and a [YOLOv5](https://github.com/ultralytics/yolov5) setup with trained weights. File paths inside them point to `/home/pi/...` and may need editing.
 
 For fall detection, install `adafruit-circuitpython-adxl34x` and `requests`, then set `BOT_TOKEN` and `CHAT_ID` in `hardware/fall_detection.py` to your Telegram bot token and the guardian's chat ID.
-
-## Supervisor
-
-**Dr. Muhammad Sheikh Sadi**, Professor, Department of CSE, KUET
-
-## Citation
-
-If you use this work, please cite the paper: [IEEE Xplore](https://ieeexplore.ieee.org/abstract/document/11024586) (DOI: [10.1109/ICECE64886.2024.11024586](https://doi.org/10.1109/ICECE64886.2024.11024586)).
-
-## License
-
-MIT. See [LICENSE](LICENSE).
