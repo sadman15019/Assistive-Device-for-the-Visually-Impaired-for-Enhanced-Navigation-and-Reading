@@ -1,0 +1,12 @@
+opencv-python
+numpy
+imutils
+scikit-image
+scipy
+pytesseract
+Pillow
+matplotlib
+textblob
+pyspellchecker
+gTTS
+pygame
