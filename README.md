@@ -51,10 +51,6 @@ VL53L0X time-of-flight laser sensors measure the distance to objects in front of
 
 ![OCR image processing pipeline](docs/images/ocr_pipeline.png)
 
-| Document outline detected | After perspective correction | Line segmentation (dilation) |
-| --- | --- | --- |
-| ![outline](docs/images/1_outline.jpg) | ![aligned](docs/images/2_aligned.jpg) | ![lines](docs/images/3_line_dilation.jpg) |
-
 `ocr/ocr.py` runs these steps:
 
 1. **Perspective correction:** Canny edge detection and contour finding locate the page; a four-point perspective transform gives a top-down view.
